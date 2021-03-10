@@ -1,11 +1,9 @@
-package Product;
+package com.pentazon.Product;
 
 import com.pentazon.ProductExceptions;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ProductRepoMock {
@@ -43,7 +41,7 @@ public class ProductRepoMock {
     public Product getProductById(String Id) throws ProductExceptions {
         Product result = mockProducts.get(Id);
         if(result == null){
-            StringBuilder message = new StringBuilder("Product with Id");
+            StringBuilder message = new StringBuilder("com.pentazon.Product with Id");
             message.append(Id);
             message.append("not found");
             throw new ProductExceptions(message.toString());

@@ -1,4 +1,4 @@
-package Product;
+package com.pentazon.Product;
 
 import java.math.BigDecimal;
 
