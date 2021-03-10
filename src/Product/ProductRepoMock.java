@@ -1,17 +1,21 @@
 package Product;
 
+import com.pentazon.ProductExceptions;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductRepoMock {
-    private List<Product> mockProducts;
+    private Map<String,Product> mockProducts;
 
     public  ProductRepoMock(){
-        mockProducts = new ArrayList<>();
+        mockProducts = new HashMap<>();
         Product plantainChips = new Product( "Adunni chips", "Savour plantain Chips",new BigDecimal(12));
         plantainChips.setProductId("AD001");
-        mockProducts.add(plantainChips);
+        mockProducts.put(plantainChips.getProductId(), plantainChips);
 
 
         Product noseMasks = new Product();
@@ -19,25 +23,31 @@ public class ProductRepoMock {
         noseMasks.setName("Bomu e nose mask");
         noseMasks.setDescription("Best in class nose masks");
         noseMasks.setPrice(new BigDecimal(4500));
-        mockProducts.add(noseMasks);
+        mockProducts.put(noseMasks.getProductId(), noseMasks);
 
 
         Product shirt = new Product("vintage shirt", "Vintage versace shirt", new BigDecimal(5000));
         shirt.setProductId("AD003");
-        mockProducts.add(shirt);
+        mockProducts.put(shirt.getProductId(),shirt);
 
     }
 
-    public List<Product> getMockProducts(){
+    public Map<String, Product> getMockProducts(){
         return mockProducts;
     }
 
-    public  void  setMockProducts(List<Product> mockProducts){
+    public  void  setMockProducts(Map<String, Product> mockProducts){
         this.mockProducts = mockProducts;
     }
 
-    public Product getProductById(String Id){
-        Product result = null;
+    public Product getProductById(String Id) throws ProductExceptions {
+        Product result = mockProducts.get(Id);
+        if(result == null){
+            StringBuilder message = new StringBuilder("Product with Id");
+            message.append(Id);
+            message.append("not found");
+            throw new ProductExceptions(message.toString());
+        }
 
         return result;
     }
