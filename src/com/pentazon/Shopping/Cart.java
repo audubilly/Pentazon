@@ -49,10 +49,6 @@ public class Cart {
 
     }
 
-
-
-
-
     public boolean verifiedProduct(Product product){
         boolean verified = false;
         if(product != null){
@@ -68,13 +64,13 @@ public class Cart {
     public boolean removeFromCart(Product product){
         boolean removed = false;
         if(product != null){
-            this.items.remove(product);
+            this.items.remove(product.getProductId());
             removed = true;
         }
         return removed;
     }
 
-    public BigDecimal calculateTotal() {
+    public BigDecimal calculateCartTotal() {
         if(!items.isEmpty()){
             this.total = BigDecimal.ZERO;
             Iterator<CartItem> cartItems = items.values().iterator();
