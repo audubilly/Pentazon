@@ -1,4 +1,4 @@
-package com.pentazon;
+package com.pentazon.Customers;
 
 import java.util.List;
 

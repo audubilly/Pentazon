@@ -1,6 +1,6 @@
 package com.pentazon.Product;
 
-import com.pentazon.ProductExceptions;
+import com.pentazon.exceptions.ProductNotFoundExceptions;
 
 /**
  * provides services for dealing with products in pentazon
@@ -13,5 +13,5 @@ public interface ProductService {
      * @return product with specified Id
      */
 
-    public Product findProductById(String productId) throws ProductExceptions;
+    public Product findProductById(String productId) throws ProductNotFoundExceptions;
 }

@@ -1,15 +1,15 @@
 package com.pentazon.Product;
 
-import com.pentazon.ProductExceptions;
+import com.pentazon.exceptions.ProductNotFoundExceptions;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductRepoMock {
+public class ProductDataBase {
     private Map<String,Product> mockProducts;
 
-    public  ProductRepoMock(){
+    public ProductDataBase(){
         mockProducts = new HashMap<>();
         Product plantainChips = new Product( "Adunni chips", "Savour plantain Chips",new BigDecimal(12));
         plantainChips.setProductId("AD001");
@@ -38,13 +38,13 @@ public class ProductRepoMock {
         this.mockProducts = mockProducts;
     }
 
-    public Product getProductById(String Id) throws ProductExceptions {
+    public Product getProductById(String Id) throws ProductNotFoundExceptions {
         Product result = mockProducts.get(Id);
         if(result == null){
             StringBuilder message = new StringBuilder("com.pentazon.Product with Id");
             message.append(Id);
             message.append("not found");
-            throw new ProductExceptions(message.toString());
+            throw new ProductNotFoundExceptions(message.toString());
         }
 
         return result;

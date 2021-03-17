@@ -1,10 +1,10 @@
 package com.pentazon.Product;
 
-import com.pentazon.ProductExceptions;
+import com.pentazon.exceptions.ProductNotFoundExceptions;
 
 public class ProductServiceImpl implements ProductService{
 
-    private  ProductRepoMock productRepo = new ProductRepoMock();
+    private ProductDataBase productRepo = new ProductDataBase();
 
     /**
      *
@@ -12,7 +12,7 @@ public class ProductServiceImpl implements ProductService{
      * @return
      */
     @Override
-    public Product findProductById(String productId) throws ProductExceptions {
+    public Product findProductById(String productId) throws ProductNotFoundExceptions {
         return productRepo.getProductById(productId);
     }
 }

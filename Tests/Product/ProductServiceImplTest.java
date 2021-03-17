@@ -3,7 +3,7 @@ package Product;
 import com.pentazon.Product.Product;
 import com.pentazon.Product.ProductService;
 import com.pentazon.Product.ProductServiceImpl;
-import com.pentazon.ProductExceptions;
+import com.pentazon.exceptions.ProductNotFoundExceptions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ class ProductServiceImplTest {
         Product product = null;
         try {
             product = productService.findProductById("AD001");
-        } catch (ProductExceptions productExceptions) {
+        } catch (ProductNotFoundExceptions productExceptions) {
             productExceptions.printStackTrace();
         }
         assertNotNull(product);
@@ -44,7 +44,7 @@ class ProductServiceImplTest {
 //        } catch (ProductExceptions productExceptions) {
 //            productExceptions.printStackTrace();
 //        }
-        assertThrows(ProductExceptions.class,()->productService.findProductById("DUD008"));
+        assertThrows(ProductNotFoundExceptions.class,()->productService.findProductById("DUD008"));
 
 
     }
