@@ -20,6 +20,7 @@ class CartTest {
 
     @AfterEach
     void tearDown() {
+        cart = null;
     }
 
     @Test
@@ -51,7 +52,7 @@ class CartTest {
     void calculateTotal() {
         assertTrue(cart.getItems().isEmpty());
         Product plantainChips = new Product("Adunni Chips", "Savoury plantainChips", new BigDecimal(50));
-        plantainChips.setProductId("ADOO1");
+        plantainChips.setProductId("AD001");
         cart.addToCart(plantainChips);
         Product shirt = new Product("Vintage shirts", "Vintage Versace shirts", new BigDecimal(5000));
         shirt.setProductId("AD003");
@@ -59,6 +60,7 @@ class CartTest {
         assertFalse(cart.getItems().isEmpty());
         assertEquals(2, cart.getItems().size());
         BigDecimal cartTotal = cart.calculateCartTotal();
+        
         assertEquals(5050, cartTotal.intValue());
     }
 
@@ -102,6 +104,7 @@ class CartTest {
         assertFalse(cart.getItems().isEmpty());
         assertEquals(2, cart.getItems().size());
         BigDecimal cartTotal = cart.calculateCartTotal();
+
         assertEquals(5050, cartTotal.intValue());
 
         CartItem chipsItem = cart.getItems().get(plantainChips.getProductId());

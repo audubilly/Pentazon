@@ -9,11 +9,10 @@ public class CartItem {
 
     private Product product;
     private int quantity;
-    private BigDecimal total;
+    private BigDecimal total = BigDecimal.ZERO;
 
     public CartItem (Product product){
         this.product = product;
-        this.addItems(BigInteger.ONE.intValue());
     }
 
     public Product getProduct() {

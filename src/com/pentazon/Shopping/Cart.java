@@ -41,7 +41,6 @@ public class Cart {
             CartItem item = items.get(product.getProductId());
             if (item == null) {
                 item = new CartItem(product);
-
             }
             item.addItems(quantity);
             this.items.put(product.getProductId(), item);
@@ -75,7 +74,9 @@ public class Cart {
             this.total = BigDecimal.ZERO;
             Iterator<CartItem> cartItems = items.values().iterator();
             while(cartItems.hasNext()){
+                System.out.println(this.total.toString());
                 this.total = this.total.add(cartItems.next().getTotal());
+
             }
         }
         return this.getTotal();
