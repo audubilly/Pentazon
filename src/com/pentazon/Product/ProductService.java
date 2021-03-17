@@ -14,4 +14,6 @@ public interface ProductService {
      */
 
     public Product findProductById(String productId) throws ProductNotFoundExceptions;
+    public boolean addProduct(Product product) throws ProductNotFoundExceptions;
+    public boolean removeProduct(Product product) throws ProductNotFoundExceptions;
 }

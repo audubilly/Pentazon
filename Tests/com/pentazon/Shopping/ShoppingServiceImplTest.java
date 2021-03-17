@@ -1,5 +1,6 @@
 package com.pentazon.Shopping;
 
+import com.pentazon.Customers.Address;
 import com.pentazon.Customers.Buyer;
 import com.pentazon.Customers.Customer;
 import com.pentazon.Payments.PaymentCard;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,6 +35,12 @@ class ShoppingServiceImplTest {
 
         dozieCart.addToCart(products.getMockProducts().get("AD001"), 5);
         dozieCart.setPaymentCard(dozie.getCards().get(0));
+        Address home = new Address();
+        home.setHouseNumber(6);
+        home.setStreet("Aso Rock Avenue");
+        home.setCity("Abuja");
+        dozie.getAddresses().add(home);
+        dozieCart.setDeliveryAddress(dozie.getAddresses().get(0));
         dozie.setCart(dozieCart);
     }
 
@@ -69,8 +77,14 @@ class ShoppingServiceImplTest {
     @Test
     void checkOut() {
         try {
+            Address deliveryAddress = dozie.getCart().getDeliveryAddress();
+            Map<String , Item> cartItems = dozie.getCart().getItems();
             Order dozieOrder = shoppingService.checkOut(dozie);
             assertNotNull(dozieOrder);
+            assertEquals(cartItems,dozieOrder.getOrderItems());
+           assertNull(dozie.getCart());
+            assertTrue(dozieOrder.isPaid());
+
         } catch (CheckOutException e) {
             e.printStackTrace();
         }

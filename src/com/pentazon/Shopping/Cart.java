@@ -1,5 +1,6 @@
 package com.pentazon.Shopping;
 
+import com.pentazon.Customers.Address;
 import com.pentazon.Payments.PaymentCard;
 import com.pentazon.Product.Product;
 import com.pentazon.Product.ProductService;
@@ -17,7 +18,15 @@ public class Cart {
     private ProductService productService;
     private BigDecimal total = BigDecimal.ZERO;
     private PaymentCard paymentCard;
+    private Address deliveryAddress;
 
+    public Address getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(Address deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
 
     public Cart() {
         items = new HashMap<>();

@@ -5,6 +5,8 @@ import com.pentazon.Payments.PayStack;
 import com.pentazon.Payments.PaymentService;
 import com.pentazon.exceptions.CheckOutException;
 
+import java.time.LocalDate;
+
 public class ShoppingServiceImpl implements ShoppingService{
     private PaymentService paymentService;
 
@@ -15,11 +17,22 @@ public class ShoppingServiceImpl implements ShoppingService{
 
 
     @Override
-    public  Order checkOut(Buyer buyer) throws  CheckOutException{
+    public  Order checkOut(Buyer buyer) throws  CheckOutException {
         this.isValidCheckOut(buyer);
         Order order = new Order();
+        Cart buyerCart = buyer.getCart();
+        boolean result = paymentService.pay(buyerCart.getPaymentCard(), buyerCart.getTotal());
+        if (result) {
+            order.setOrderItems(buyer.getCart().getItems());
+            order.setPaid(result);
+            order.setOrderDate(LocalDate.now());
+            order.setOrderTotal(buyerCart.getTotal());
+            order.setDeliveryAddress(buyerCart.getDeliveryAddress());
+            buyer.setCart(null);
+        }
         return order;
     }
+
     public boolean isValidCheckOut(Buyer buyer) throws CheckOutException {
         if(buyer == null){
             throw new CheckOutException("No buyer found at check out");

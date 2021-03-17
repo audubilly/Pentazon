@@ -13,6 +13,7 @@ public class Order {
     private LocalDate deliveryDate;
     private LocalDate orderDate;
     private Address deliveryAddress;
+    private boolean paid;
 
     public String getOrderId() {
         return orderId;
@@ -60,5 +61,13 @@ public class Order {
 
     public void setDeliveryAddress(Address deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 }
